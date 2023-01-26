@@ -1,2 +1,2 @@
-# cronus-eater
-Just a spreadsheets time series extractor
+# Cronus Eater
+Extract and normalize time series from spreadsheets
