@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "cronus-eater"
 version = "0.1.0"
-description = "A tool to extract and normalize time series from spreadsheets"
+description = "A simple tool to get time series from spreadsheets"
 authors = ["Breno Fernandes <brenojesusfernandes@pm.com>"]
 license = "MIT"
 
@@ -14,6 +14,9 @@ openpyxl = "^3.0.10"
 pytest = "^7.2.1"
 blue = "^0.9.1"
 loguru = "^0.6.0"
+isort = ">=5.10.1"
+mypy = "0.991"
+pyright = ">=1.1.286"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
