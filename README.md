@@ -27,7 +27,7 @@ Documentation is a work-in-progress.
 
 ## Development Documentation
 
-You can find [here](docs\README.md)
+You can find [here](docs/README.md)
 
 
  
