@@ -5,7 +5,7 @@ on:
     paths:
       - '**.py'
       - '**.pyi'
-      - 'pyproject.toml"
+      - 'pyproject.toml'
       - '.github/workflows/test.yml'
   pull_request:
   workflow_dispatch:
