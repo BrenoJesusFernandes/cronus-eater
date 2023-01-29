@@ -1,5 +1,8 @@
+from loguru import logger
+
+
 def main():
-    print('**beep**')
+    logger.info('**beep**')
 
 
 if __name__ == '__main__':
