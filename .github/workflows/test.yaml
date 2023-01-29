@@ -13,11 +13,6 @@ on:
       - 'pyproject.toml'
       - '.github/workflows/test.yml'
   workflow_dispatch:
-      - '**.py'
-      - '**.pyi'
-      - 'pyproject.toml'
-      - '.github/workflows/test.yml'
-
 
 jobs:
   released:
