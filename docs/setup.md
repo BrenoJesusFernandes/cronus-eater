@@ -16,24 +16,25 @@ To configure auto code format on auto save with blue and isort, install the exte
 ```json
 {
     "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
     "python.formatting.provider": "black",
     "python.formatting.blackPath": "absolute_path_to_blue_in_your_poetry_virtual_environment",
-    "python.isort.args": [
-        "--profile=black",
-    ],
     "[python]": {
         "editor.codeActionsOnSave": {
             "source.organizeImports": true
         },
-        "editor.formatOnType": true
     },
     "runOnSave.commands": [
+        {
+            "match": ".py",
+            "command": "editor.action.organizeImports",
+            "runIn": "vscode"
+        },
         {
             "match": ".py",
             "command": "editor.action.formatDocument",
             "runIn": "vscode"
         }
-    ]
+    ],
 }
-
 ```
