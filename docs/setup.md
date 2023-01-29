@@ -18,7 +18,7 @@ To configure auto code format on auto save with blue and isort, install the exte
     "editor.formatOnSave": true,
     "files.autoSave": "afterDelay",
     "python.formatting.provider": "black",
-    "python.formatting.blackPath": "absolute_path_to_blue_in_your_poetry_virtual_environment",
+    "python.formatting.blackPath": "absolute_path_to_your_poetry_virtual_environment\\Scripts\\blue",
     "[python]": {
         "editor.codeActionsOnSave": {
             "source.organizeImports": true
