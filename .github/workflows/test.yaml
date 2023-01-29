@@ -39,5 +39,11 @@ jobs:
         os: ${{ matrix.os }}
         python-version: ${{ matrix.python-version }}
 
+    - name: Check Blue Style
+      run: poetry run blue --check cronus_eater tests
+    
+    - name: Check Isort Style
+      run: poetry run isort --check cronus_eater tests
+
     - name: Run pytest
       run: poetry run pytest
