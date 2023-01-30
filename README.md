@@ -23,7 +23,7 @@ poetry add cronus-eater@latest
 
 ## Documentation
 
-You can find [here](docs/README.md)
+You can find [here](docs/)
 
 
  
