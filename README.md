@@ -8,7 +8,7 @@ Extract and normalize time series from any spreadsheet with differents patterns.
 
 The source code is currently hosted on GitHub at: <https://github.com/BrenoJesusFernandes/cronus-eater>
 
-Binary installers for the latest released version is going to available at the [Python Package Index (PyPI)](https://pypi.org/project/pandas-stubs).
+Binary installers for the latest released version is going to available at the [Python Package Index (PyPI)](https://pypi.org/project/cronus-eater).
 
 
 ```sh
@@ -22,10 +22,6 @@ poetry add cronus-eater@latest
 [MIT](LICENSE)
 
 ## Documentation
-
-Documentation is a work-in-progress.
-
-## Development Documentation
 
 You can find [here](docs/README.md)
 
