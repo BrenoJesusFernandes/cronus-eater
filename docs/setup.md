@@ -72,3 +72,80 @@ Finally, to get tips from mypy while writing your code add the bellow configurat
     }
 }
 ```
+
+To config pytests in vscode add:
+
+```json
+
+{
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
+
+
+```
+
+To config `.vscode\launch.json` :
+
+```json
+{
+  "version": "0.1.0",
+  "configurations": [
+    {
+      "name": "Tests",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "justMyCode": true
+    },
+    {
+      "name": "Blue",
+      "type": "python",
+      "request": "launch",
+      "module": "blue",
+      "justMyCode": true,
+      "args": [
+        "--check",
+        "cronus_eater"
+      ]
+    },
+    {
+      "name": "Isort",
+      "type": "python",
+      "request": "launch",
+      "module": "isort",
+      "justMyCode": true,
+      "args": [
+        "--check",
+        "cronus_eater"
+      ]
+    },
+    {
+      "name": "Python: Module",
+      "type": "python",
+      "request": "launch",
+      "module": "cronus_eater",
+      "justMyCode": true
+    }
+  ],
+  "compounds": [
+    {
+      "name": "All tests",
+      "configurations": [
+        "Tests",
+        "Blue",
+        "Isort"
+      ],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "",
+        "order": 1,
+      }
+    }
+  ]
+}
+```
