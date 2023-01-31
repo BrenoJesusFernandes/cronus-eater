@@ -46,6 +46,18 @@ If you want to auto format your code on auto save, install the extension [Run on
 
 ```
 
+In addition you can setup the tests in your `.vscode\settings.json` file:
+
+```json
+{
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
+```
+
 Finally, to get tips from mypy while writing your code add the bellow configurations in your `.vscode\settings.json` file:
 
 ```json
