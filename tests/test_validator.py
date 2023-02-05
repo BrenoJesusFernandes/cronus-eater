@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import numpy as np
+import pandas as pd
 
 from cronus_eater import _validator
 
@@ -75,3 +76,14 @@ def test_is_financial_number():
     assert not _validator.is_financial_number('1.234.23')
     assert not _validator.is_financial_number('this is a text')
     assert not _validator.is_financial_number('NaN ')
+
+
+def test_is_time_series_row():
+    df = pd.read_excel('tests/data/source_0.xlsx', header=None)
+    invalid_row = df.iloc[1, 1:]
+    valid_row = df.iloc[24, 1:]
+    empty_row = df.iloc[3, 1:]
+
+    assert _validator.is_time_series_row(valid_row)
+    assert not _validator.is_time_series_row(invalid_row)
+    assert not _validator.is_time_series_row(empty_row)

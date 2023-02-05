@@ -1,5 +1,5 @@
 import re
-from typing import Any
+from typing import Any, List
 
 import numpy as np
 import pandas as pd
@@ -72,3 +72,31 @@ def is_financial_number(value: Any) -> bool:
         return True
 
     return False
+
+
+def is_text(value: Any) -> bool:
+    return not is_blank_value(value) and not is_financial_number(value)
+
+
+def is_time_series_row(row: pd.Series) -> bool:
+    sequence_text: List[str] = []
+    sequence_numbers: List[str] = []
+
+    # If is a empty sequence return false
+    if len(row.dropna()) == 0:
+        return False
+
+    # Calcule the right pattern of a time series row
+    for value in row:
+        if is_text(value) and len(sequence_numbers) == 0:
+            sequence_text.append(str(value))
+        elif is_financial_number(value) and len(sequence_text) >= 1:
+            sequence_numbers.append(str(value))
+        elif is_text(value) and len(sequence_numbers) > 0:
+            break
+
+    # if a sequence is empty means we do not have a time series pattern
+    if 0 in (len(sequence_numbers), len(sequence_text)):
+        return False
+
+    return True
