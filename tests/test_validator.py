@@ -87,3 +87,14 @@ def test_is_time_series_row():
     assert _validator.is_time_series_row(valid_row)
     assert not _validator.is_time_series_row(invalid_row)
     assert not _validator.is_time_series_row(empty_row)
+
+
+def test_is_text_row():
+    df = pd.read_excel('tests/data/source_0.xlsx', header=None)
+    mix_row = df.iloc[24, 1:11]
+    text_row = df.iloc[21, 1:11]
+    empty_row = df.iloc[3, 1:11]
+
+    assert _validator.is_text_row(text_row)
+    assert not _validator.is_text_row(mix_row)
+    assert not _validator.is_text_row(empty_row)

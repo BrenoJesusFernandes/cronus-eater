@@ -100,3 +100,16 @@ def is_time_series_row(row: pd.Series) -> bool:
         return False
 
     return True
+
+
+def is_text_row(row: pd.Series) -> bool:
+    # If is a empty sequence return false
+    if len(row.dropna()) == 0:
+        return False
+
+    # If there is at least one number is not a text row
+    for value in row:
+        if is_financial_number(value):
+            return False
+
+    return True
