@@ -9,7 +9,7 @@ from cronus_eater.model import TimeSeries
 
 def norm_blank_value(value: Any) -> Any:
     if _validator.is_blank_value(value):
-        return pd.NA
+        return np.nan
 
     return value
 
