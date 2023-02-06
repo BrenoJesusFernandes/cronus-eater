@@ -79,7 +79,7 @@ def test_is_financial_number():
 
 
 def test_is_time_series_row():
-    df = pd.read_excel('tests/data/source_0.xlsx', header=None)
+    df = pd.read_excel('tests/data/source.xlsx', header=None)
     invalid_row = df.iloc[1, 1:]
     valid_row = df.iloc[24, 1:]
     empty_row = df.iloc[3, 1:]
@@ -90,7 +90,7 @@ def test_is_time_series_row():
 
 
 def test_is_text_row():
-    df = pd.read_excel('tests/data/source_0.xlsx', header=None)
+    df = pd.read_excel('tests/data/source.xlsx', header=None)
     mix_row = df.iloc[24, 1:11]
     text_row = df.iloc[21, 1:11]
     empty_row = df.iloc[3, 1:11]

@@ -3,7 +3,7 @@ from typing import Dict, List, Tuple, Union
 import numpy as np
 import pandas as pd
 
-from cronus_eater import _validator
+from cronus_eater import _normalizer, _validator
 from cronus_eater.model import TimeSeries, TimeSeriesMetadata
 
 
@@ -102,7 +102,7 @@ def clean_gargabe_column(
 ) -> pd.DataFrame:
 
     if start_row == -1 and start_column >= 0:
-        df.iloc[:, start_column] = np.nan
+        df.isetitem(start_column, np.nan)
         return df.copy()
 
     return df.copy()
@@ -174,6 +174,12 @@ def find_time_series(raw_dataframe: pd.DataFrame) -> List[TimeSeries]:
         time_series_df = df.iloc[
             start_row : end_row + 1, start_column : end_column + 1
         ].copy()
+        time_series_df = time_series_df.T.reset_index(drop=True).T.reset_index(
+            drop=True
+        )
+        time_series_df = time_series_df.applymap(
+            lambda value: _normalizer.norm_blank_value(value)
+        )
         times_series.append(TimeSeries(metadata, time_series_df))
 
         # Clean Time Series from raw dataframe
