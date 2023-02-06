@@ -97,24 +97,71 @@ def clean_time_series_from_raw_df(
     return df.copy()
 
 
+def clean_gargabe_column(
+    df: pd.DataFrame, start_row: int, start_column: int
+) -> pd.DataFrame:
+
+    if start_row == -1 and start_column >= 0:
+        df.iloc[:, start_column] = np.nan
+        return df.copy()
+
+    return df.copy()
+
+
+def clean_gargabe_table(
+    df: pd.DataFrame,
+    start_row: int,
+    start_column: int,
+    end_row: int,
+    end_column: int,
+) -> pd.DataFrame:
+
+    if (
+        start_row >= 0
+        and start_column >= 0
+        and end_column >= 0
+        and end_row >= 0
+    ):
+        df.iloc[start_row : end_row + 1, start_column : end_row + 1] = np.nan
+        return df.copy()
+
+    return df.copy()
+
+
 def find_time_series(raw_dataframe: pd.DataFrame) -> List[TimeSeries]:
 
     df = raw_dataframe.copy()
     times_series = []
 
     while True:
+
+        # If there's no more value, finish the search
+        tot_not_null = (~df.isnull()).sum().iloc[0]
+        if tot_not_null == 0:
+            break
+
         start_row, start_column = find_start_row_column(df)
 
-        if -1 in (start_row, start_column):
-            # clean_gargabe()
+        # If can find start row, clean gargabe column and starts again the search
+        if start_row == -1 and start_column >= 0:
+            df = clean_gargabe_column(df, start_row, start_column)
             continue
+        # If there's no start column finish the search
+        elif start_row == -1 and start_column == -1:
+            break
 
         end_row, end_column = find_end_row_column(df, start_row, start_column)
-        if -1 in (end_row, end_column):
-            # clean_gargabe()
-            continue
 
-        start_row = find_header(df, start_row, end_column)
+        header_row = find_header(df, start_row, end_column)
+        # If can't find a header row clean the table and start again the search
+        if header_row == -1:
+            df = clean_gargabe_table(
+                df, start_row, start_column, end_row, end_column
+            )
+            continue
+        else:
+            start_row = header_row
+
         metadata = TimeSeriesMetadata(
             'whatever',
             'whatever',
@@ -123,17 +170,14 @@ def find_time_series(raw_dataframe: pd.DataFrame) -> List[TimeSeries]:
             start_row,
             end_row,
         )
+        # Copy Time Series From raw dataframe
         time_series_df = df.iloc[
             start_row : end_row + 1, start_column : end_column + 1
         ].copy()
-
         times_series.append(TimeSeries(metadata, time_series_df))
-        df = clean_time_series_from_raw_df(df, metadata)
 
-        # If there's no more value finish the search
-        tot_not_null = df[~df.isnull()].sum().iloc[0]
-        if tot_not_null == 0:
-            break
+        # Clean Time Series from raw dataframe
+        df = clean_time_series_from_raw_df(df, metadata)
 
     return times_series
 
