@@ -102,7 +102,7 @@ def clean_gargabe_column(
 ) -> pd.DataFrame:
 
     if start_row == -1 and start_column >= 0:
-        df.iloc[:, start_column] = np.nan
+        df[df.columns[start_column]] = np.nan
         return df.copy()
 
     return df.copy()
