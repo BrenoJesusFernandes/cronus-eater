@@ -33,12 +33,14 @@ def find_end_column(row: pd.Series) -> int:
     if len(row.dropna()) == 0:
         return False
 
+    qtd_text_sequence = 0
     # Calcule the right pattern of a time series row
     for index, value in row.items():
         if (
             _validator.is_text(value) or _validator.is_date_time(value)
         ) and last_number_column == -1:
             last_text_column = int(str(index))
+            qtd_text_sequence += 1
         elif _validator.is_financial_number(value) and last_text_column != -1:
             last_number_column = int(str(index))
         elif (

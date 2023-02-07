@@ -68,7 +68,7 @@ def is_year(value: Any) -> bool:
 
     text_value = str(value).strip()
     if re.match(
-        r'(([1][9])|([2][0-1]))[0-9][0-9](([.]|[,]|[\s])([1-4]|([0][1-9])|([1][0-2])))?$',
+        r'(([1][9])|([2][0-1]))[0-9][0-9](([.]|[,]|[\s])([0-4]|([0][1-9])|([1][0-2])))?$',
         text_value,
     ):
         return True
@@ -112,11 +112,15 @@ def is_time_series_row(row: pd.Series) -> bool:
 
     # Calcule the right pattern of a time series row
     for value in row:
-        if is_text(value) and len(sequence_numbers) == 0:
+        if (is_text(value) or is_date_time(value)) and len(
+            sequence_numbers
+        ) == 0:
             sequence_text.append(str(value))
-        elif is_financial_number(value) and len(sequence_text) >= 1:
+        elif is_financial_number(value) and len(sequence_text) in (1, 2, 3):
             sequence_numbers.append(str(value))
-        elif is_text(value) and len(sequence_numbers) > 0:
+        elif (is_text(value) or is_date_time(value)) and len(
+            sequence_numbers
+        ) > 0:
             break
 
     # if a sequence is empty means we do not have a time series pattern
@@ -134,14 +138,13 @@ def is_text_row(row: pd.Series) -> bool:
     # If there is at least one number is not a text row
     n_text = 0
     for value in row:
-        if is_financial_number(value):
-            return False
-        elif is_text(value) or is_date_time(value):
+        if is_text(value) or is_date_time(value):
             n_text += 1
-    if n_text < 3:
-        return False
 
-    return True
+    if n_text >= 3:
+        return True
+
+    return False
 
 
 def is_date_time(value: Any) -> bool:

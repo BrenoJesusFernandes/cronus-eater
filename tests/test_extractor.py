@@ -160,3 +160,15 @@ def test_find_btg_time_series():
     time_series = _extractor.find_time_series(raw_dataframe)
 
     assert len(time_series) == 1
+
+
+def test_find_pagseguro_time_series():
+    raw_dataframe = pd.read_excel(
+        'tests/data/pagseguro_3Q22.xlsx',
+        sheet_name='PAGS | Operating Figures',
+        header=None,
+    )
+
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 4
