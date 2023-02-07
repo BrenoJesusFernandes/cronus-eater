@@ -85,7 +85,7 @@ def find_end_row_column(
     for row_index, row in df.iterrows():
         if _validator.is_time_series_row(row):
             end_row = int(str(row_index))
-        elif _validator.is_text_row(row) :
+        elif _validator.is_text_row(row):
             break
 
     return end_row, end_column
