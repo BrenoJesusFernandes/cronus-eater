@@ -19,15 +19,11 @@ def test_clean_time_series_from_raw_df():
     df = _extractor.clean_time_series_from_raw_df(df, metadata)
 
     tot_not_null = (
-        (
-            ~df.iloc[
-                metadata.start_row : metadata.end_row + 1,
-                metadata.start_column : metadata.end_column + 1,
-            ].isnull()
-        )
-        .sum()
-        .iloc[0]
-    )
+        ~df.iloc[
+            metadata.start_row : metadata.end_row + 1,
+            metadata.start_column : metadata.end_column + 1,
+        ].isnull()
+    ).values.sum()
 
     assert tot_not_null == 0
 
@@ -70,14 +66,10 @@ def test_clean_gargabe_table():
         df, start_row, start_column, end_row, end_column
     )
     tot_null = (
-        (
-            ~df.iloc[
-                start_row : end_row + 1, start_column : end_column + 1
-            ].isnull()
-        )
-        .sum()
-        .iloc[0]
-    )
+        ~df.iloc[
+            start_row : end_row + 1, start_column : end_column + 1
+        ].isnull()
+    ).values.sum()
     assert tot_null == 0
 
     df = pd.DataFrame()
@@ -146,3 +138,25 @@ def test_find_time_series():
     assert time_series[1].dataframe.equals(target_1)
     assert time_series[2].dataframe.equals(target_2)
     assert time_series[3].dataframe.equals(target_3)
+
+
+def test_find_nubank_time_series():
+    raw_dataframe = pd.read_excel(
+        'tests/data/nubank_3Q22.xlsx',
+        sheet_name='Financial Position (Balanços)',
+        header=None,
+    )
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 2
+
+
+def test_find_btg_time_series():
+    raw_dataframe = pd.read_excel(
+        'tests/data/btg_3Q22.xlsx',
+        sheet_name='InputSite_IncomeStatement',
+        header=None,
+    )
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 1

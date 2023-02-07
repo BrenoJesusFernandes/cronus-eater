@@ -18,8 +18,8 @@ def slice_dataframe(
 
 
 def find_header(df: pd.DataFrame, start_row: int, end_column: int) -> int:
-    for index, value in df.iloc[start_row::-1, end_column].items():
-        if _validator.is_text(value):
+    for index, value in df.iloc[start_row - 1 :: -1, end_column].items():
+        if _validator.is_date_time(value):
             return int(str(index))
 
     return -1
@@ -35,11 +35,15 @@ def find_end_column(row: pd.Series) -> int:
 
     # Calcule the right pattern of a time series row
     for index, value in row.items():
-        if _validator.is_text(value) and last_number_column == -1:
+        if (
+            _validator.is_text(value) or _validator.is_date_time(value)
+        ) and last_number_column == -1:
             last_text_column = int(str(index))
         elif _validator.is_financial_number(value) and last_text_column != -1:
             last_number_column = int(str(index))
-        elif _validator.is_text(value) and last_number_column != -1:
+        elif (
+            _validator.is_text(value) or _validator.is_date_time(value)
+        ) and last_number_column != -1:
             break
 
     # if a sequence is empty means we do not have a time series pattern
@@ -81,7 +85,7 @@ def find_end_row_column(
     for row_index, row in df.iterrows():
         if _validator.is_time_series_row(row):
             end_row = int(str(row_index))
-        elif _validator.is_text_row(row):
+        elif _validator.is_text_row(row) :
             break
 
     return end_row, end_column
@@ -136,7 +140,7 @@ def find_time_series(raw_dataframe: pd.DataFrame) -> List[TimeSeries]:
     while True:
 
         # If there's no more value, finish the search
-        tot_not_null = (~df.isnull()).sum().iloc[0]
+        tot_not_null = (~df.isnull()).values.sum()
         if tot_not_null == 0:
             break
 
