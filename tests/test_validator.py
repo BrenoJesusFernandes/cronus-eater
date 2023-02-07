@@ -137,7 +137,7 @@ def test_is_date_time():
     assert _validator.is_date_time(' 10-10-2022 ')
     assert _validator.is_date_time(' 31/02/2022 8:26:00.39 ')
 
-    assert _validator.is_date_time(' 3Q22 ')
+    assert _validator.is_date_time(' 3Q22')
     assert _validator.is_date_time(' 3T22 ')
     assert _validator.is_date_time(' 3Q2022 ')
     assert _validator.is_date_time(' 3T2022 ')
