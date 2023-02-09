@@ -151,6 +151,71 @@ def test_find_nubank_time_series():
     assert len(time_series) == 2
 
 
+def test_find_all_nubank_time_series():
+    raw_dataframe = pd.read_excel(
+        'tests/data/nubank_3Q22.xlsx',
+        sheet_name='Profit or loss (Resultado)- Acc',
+        header=None,
+    )
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 2
+
+    raw_dataframe = pd.read_excel(
+        'tests/data/nubank_3Q22.xlsx',
+        sheet_name='Profit or loss (Resultado)- Q',
+        header=None,
+    )
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 2
+
+    raw_dataframe = pd.read_excel(
+        'tests/data/nubank_3Q22.xlsx',
+        sheet_name='Cash Flow (Fluxo de Caixa)',
+        header=None,
+    )
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 2
+
+    raw_dataframe = pd.read_excel(
+        'tests/data/nubank_3Q22.xlsx',
+        sheet_name='Revenue  (Receita)',
+        header=None,
+    )
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 2
+
+    raw_dataframe = pd.read_excel(
+        'tests/data/nubank_3Q22.xlsx',
+        sheet_name='Expenses (Despesas)',
+        header=None,
+    )
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 2
+
+    raw_dataframe = pd.read_excel(
+        'tests/data/nubank_3Q22.xlsx',
+        sheet_name='Credit Oper. (Op. De Crédito)',
+        header=None,
+    )
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 6
+
+    raw_dataframe = pd.read_excel(
+        'tests/data/nubank_3Q22.xlsx',
+        sheet_name='Deposits (Depósitos)',
+        header=None,
+    )
+    time_series = _extractor.find_time_series(raw_dataframe)
+
+    assert len(time_series) == 2
+
+
 def test_find_btg_time_series():
     raw_dataframe = pd.read_excel(
         'tests/data/btg_3Q22.xlsx',
