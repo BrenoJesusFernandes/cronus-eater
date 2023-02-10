@@ -73,21 +73,6 @@ Finally, to get tips from mypy while writing your code add the bellow configurat
 }
 ```
 
-To config pytests in vscode add:
-
-```json
-
-{
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
-}
-
-
-```
-
 To config `.vscode\launch.json` :
 
 ```json
