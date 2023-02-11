@@ -31,19 +31,20 @@ To configure blue and isort format in vscode just add in your `.vscode\settings.
 If you want to auto format your code on auto save, install the extension [Run on Save](https://marketplace.visualstudio.com/items?itemName=pucelle.run-on-save) and make sure to add in your `.vscode\settings.json` file:
 
 ```json
-"runOnSave.commands": [
-        {
-            "match": ".py",
-            "command": "editor.action.organizeImports",
-            "runIn": "vscode"
-        },
-        {
-            "match": ".py",
-            "command": "editor.action.formatDocument",
-            "runIn": "vscode"
-        }
-    ],
-
+{
+  "runOnSave.commands": [
+          {
+              "match": ".py",
+              "command": "editor.action.organizeImports",
+              "runIn": "vscode"
+          },
+          {
+              "match": ".py",
+              "command": "editor.action.formatDocument",
+              "runIn": "vscode"
+          }
+      ],
+}
 ```
 
 In addition you can setup the tests in your `.vscode\settings.json` file:
