@@ -11,7 +11,7 @@ from cronus_eater import _extractor, _normalizer
 def main():
     logger.info('Reading File ...')
     raw_dataframes = pd.read_excel(
-        'tests/data/nubank_3Q22.xlsx', header=None, sheet_name=None
+        'tests/data/nubank_4Q22.xlsx', header=None, sheet_name=None
     )
 
     logger.info('Processing Time Series ...')
@@ -40,13 +40,13 @@ def main():
     )
 
     times_series_df['Chave'] = (
-        norm_index
+        norm_sheet_name
         + '_'
         + times_series_df['Numeric Index'].astype(str)
         + '_'
         + times_series_df['Order'].astype(str)
         + '_'
-        + norm_sheet_name
+        + norm_index
     )
 
     times_series_df = times_series_df.pivot_table(
