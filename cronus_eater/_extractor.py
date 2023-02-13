@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -93,6 +93,19 @@ def find_end_row_column(
     return end_row, end_column
 
 
+def clean_garbage_row(row: pd.Series) -> pd.Series:
+    qtd_text = row.map(lambda value: _validator.is_text(value)).sum()
+    if qtd_text >= 2:
+        return row.map(lambda value: pd.NA)
+    return row
+
+
+def to_literal_blank(value: Any) -> Any:
+    if pd.isna(value):
+        return 'Vazio'
+    return value
+
+
 def clean_time_series_from_raw_df(
     df: pd.DataFrame, metadata: TimeSeriesMetadata
 ) -> pd.DataFrame:
@@ -134,11 +147,11 @@ def clean_gargabe_table(
     return df.copy()
 
 
-def find_time_series(raw_dataframe: pd.DataFrame) -> List[TimeSeries]:
+def find_time_series(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
 
     df = raw_dataframe.copy()
-    times_series = []
-
+    dfs = []
+    df_order = 1
     while True:
 
         # If there's no more value, finish the search
@@ -180,21 +193,63 @@ def find_time_series(raw_dataframe: pd.DataFrame) -> List[TimeSeries]:
         time_series_df = df.iloc[
             start_row : end_row + 1, start_column : end_column + 1
         ].copy()
-        time_series_df = time_series_df.T.reset_index(drop=True).T.reset_index(
-            drop=True
+
+        time_series_df = (
+            time_series_df.apply(lambda row: clean_garbage_row(row), axis=1)
+            .dropna(how='all', axis=0)
+            .dropna(how='all', axis=1)
         )
+
+        time_series_df[time_series_df.columns[0]] = time_series_df[
+            time_series_df.columns[0]
+        ].map(lambda value: to_literal_blank(value))
         time_series_df = time_series_df.applymap(
             lambda value: _normalizer.norm_blank_value(value)
         )
-        times_series.append(TimeSeries(metadata, time_series_df))
+
+        time_series_df.iloc[0, 0] = 'Index'
+        time_series_df.iloc[0, :] = time_series_df.iloc[0, :].map(
+            lambda value: _normalizer.norm_header(value)
+        )
+
+        time_series_df = time_series_df.rename(
+            columns=time_series_df.iloc[0]
+        ).drop(time_series_df.index[0])
+
+        time_series_df.fillna(0, inplace=True)
+        time_series_df.reset_index(inplace=True)
+        time_series_df.rename(columns={'index': 'Numeric Index'}, inplace=True)
+
+        time_series_df['Order'] = df_order
+
+        time_series_df = pd.melt(
+            time_series_df,
+            id_vars=['Numeric Index', 'Index', 'Order'],
+            var_name='Time',
+            value_name='Value',
+        )
+
+        dfs.append(time_series_df)
 
         # Clean Time Series from raw dataframe
         df = clean_time_series_from_raw_df(df, metadata)
+        df_order += 1
 
-    return times_series
+    if len(dfs) == 0:
+        return pd.DataFrame()
+
+    return pd.concat(dfs, ignore_index=True)
 
 
 def find_all_time_series(
-    raw_dataframe: Dict[Union[int, str], pd.DataFrame]
-) -> List[TimeSeries]:
-    return []
+    raw_dataframes: Dict[Union[int, str], pd.DataFrame]
+) -> pd.DataFrame:
+    all_time_series = []
+
+    for sheet_name, raw_df in raw_dataframes.items():
+        df = find_time_series(raw_df)
+        if not df.empty:
+            df['Sheet Name'] = sheet_name
+            all_time_series.append(df)
+
+    return pd.concat(all_time_series, ignore_index=True)
