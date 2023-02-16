@@ -9,6 +9,10 @@
 - Run all tests: `pytest`
 - Do you want to add a new dependency? `poetry add --dev foo-pkg@latest`
 
+## Pycharm Configuration
+
+...
+
 ## VS Code Configuration
 
 To configure blue and isort format in vscode just add in your `.vscode\settings.json` file:
