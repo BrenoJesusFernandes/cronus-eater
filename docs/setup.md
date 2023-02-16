@@ -15,7 +15,7 @@
 
 ## VS Code Configuration
 
-You can basically download the settings file [here] and chance the blue path to yours, or create  the file following the steps below.
+You can basically download the settings file [here](files/settings.json) and chance the blue path to yours, or create  the file following the steps below.
 
 To configure blue and isort format in vscode just add in your `.vscode\settings.json` file:
 
