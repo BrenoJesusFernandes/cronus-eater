@@ -6,6 +6,6 @@ For any update to the code, we require an associated test that validates the new
 
 Instructions for working with the code are found here:
 
-- [How to set up the environment](setup.md)
+- [How to set up the environment](setup)
 - [How to test the project](tests.md)
 

@@ -1,19 +1,4 @@
-# Set Up Environment
-
-## Basic Check List
-
-- Make sure you have `python >= 3.7.1` installed.
-- Install poetry: `pip install poetry`
-- Install the project dependencies: `poetry update`
-- Enter the virtual environment: `poetry shell`
-- Run all tests: `pytest`
-- Do you want to add a new dependency? `poetry add --dev foo-pkg@latest`
-
-## Pycharm Configuration
-
-...
-
-## VS Code Configuration
+## Visual Studio Code Set up
 
 You can basically download the settings file [here](files/settings.json) and chance the blue path to yours, or create  the file following the steps below.
 
