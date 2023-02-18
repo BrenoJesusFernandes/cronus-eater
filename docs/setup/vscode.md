@@ -1,6 +1,6 @@
 ## Visual Studio Code Set up
 
-You can basically download the settings file [here](files/settings.json) and chance the blue path to yours, or create  the file following the steps below.
+You can basically download the settings file [here](utils/settings.json) and chance the blue path to yours, or create  the file following the steps below.
 
 To configure blue and isort format in vscode just add in your `.vscode\settings.json` file:
 
@@ -9,7 +9,7 @@ To configure blue and isort format in vscode just add in your `.vscode\settings.
     "editor.formatOnSave": true,
     "files.autoSave": "afterDelay",
     "python.formatting.provider": "black",
-    "python.formatting.blackPath": "absolute_path_to_your_poetry_virtual_environment\\Scripts\\blue",
+    "python.formatting.blackPath": "your_path/Scripts/blue",
     "[python]": {
         "editor.codeActionsOnSave": {
             "source.organizeImports": true

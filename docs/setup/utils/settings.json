@@ -1,0 +1,36 @@
+{
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "your_path/Scripts/blue",
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+    },
+    "runOnSave.commands": [
+        {
+            "match": ".py",
+            "command": "editor.action.organizeImports",
+            "runIn": "vscode"
+        },
+        {
+            "match": ".py",
+            "command": "editor.action.formatDocument",
+            "runIn": "vscode"
+        }
+    ],
+    "python.linting.enabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none"
+    },
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
