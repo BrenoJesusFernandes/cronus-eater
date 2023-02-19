@@ -19,9 +19,7 @@ pytest = "^7.2.1"
 blue = "^0.9.1"
 loguru = "^0.6.0"
 isort = ">=5.10.1"
-pandas-stubs = { version = "^1.5.0", python =  ">=3.8,<3.12" }
 mypy = { version = "0.991", python =  ">=3.8,<3.12" }
-pyright = { version = ">=1.1.286", python =  ">=3.8,<3.12" }
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
