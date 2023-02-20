@@ -8,6 +8,48 @@
 
 Extract and normalize time series from any spreadsheet with differents patterns.
 
+
+### Where is the data I want?
+
+```python
+
+import pandas as pd
+
+raw_dataframe = pd.read_excel(
+        'tests/data/nubank_3Q22.xlsx', sheet_name='Credit Oper. (Op. De Crédito)', header=None 
+)
+
+raw_dataframe.head()
+
+```
+
+|   | 0	| 1 |	2 |	3 |	4 |	5 |	6 |	7 |	8 |
+|---|---|---|---|---|---|---|---|---|---|
+ | 0 | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	
+ | 1 | 	NaN | 	Nu Holdings Ltd. | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	
+ | 2 | 	NaN | 	Credit Operations | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	
+ | 3 | 	NaN | 	Amounts in thousands of US$ | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	
+ | 4 | 	NaN | 	Back to Contents | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	NaN | 	
+
+### Let's devours this times series  
+
+```python
+
+import cronus_eater
+times_series_df = cronus_eater.find_time_series(raw_dataframe)
+times_series_df.head()
+
+```
+
+
+|	   |Numeric Index |	Index |	Order |	Time |	Value |
+|----|--------------|-------|-------|------|---------|
+| 0	 | 12 |	Receivables - current |	1 |	3T22 |	3509311 |
+| 1	 | 13 |	Receivables - installments |	1 |	3T22 |	3598374 |
+| 2	 | 14 |	Receivables - revolving |	1 |	3T22 |	691915 |
+| 3	 | 15 |	Total receivables |	1 |	3T22 |	7799600 |
+| 4	 | 16 |	Fair value adjustment - portfolio hedge |	1 |	3T22 |	-61 |
+
 ## Where to get it
 
 The source code is currently hosted on GitHub at: <https://github.com/BrenoJesusFernandes/cronus-eater>
