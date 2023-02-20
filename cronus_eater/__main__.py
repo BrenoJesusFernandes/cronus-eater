@@ -5,7 +5,7 @@ import pandas as pd
 from loguru import logger
 from unidecode import unidecode
 
-from cronus_eater import _extractor, _normalizer
+from cronus_eater import _converter, _extractor
 
 
 def main():
@@ -53,7 +53,7 @@ def main():
         index=['Chave'],
         columns='Time',
         values='Value',
-    ).applymap(lambda value: _normalizer.blank_to_zero(value))
+    ).applymap(lambda value: _converter.blank_to_zero(value))
 
     times_series_df = times_series_df.reindex(
         sorted(times_series_df.columns.values, key=lambda value: value[1:]),
