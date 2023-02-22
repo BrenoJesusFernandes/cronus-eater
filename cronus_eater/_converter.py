@@ -1,7 +1,8 @@
 from typing import Any
 
-from cronus_eater import _validator
 import pandas as pd
+
+from cronus_eater import _validator
 
 
 def blank_to_zero(value: Any) -> Any:

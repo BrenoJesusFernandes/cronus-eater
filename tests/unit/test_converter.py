@@ -1,7 +1,7 @@
-from cronus_eater import _converter
-
-import pandas as pd
 import numpy as np
+import pandas as pd
+
+from cronus_eater import _converter
 
 
 def test_blank_to_zero():
