@@ -68,11 +68,11 @@ poetry add cronus-eater
 
 ## License
 
-[MIT](https://github.com/breno-jesus-fernandes/cronus-eater/LICENSE)
+[MIT](https://github.com/breno-jesus-fernandes/cronus-eater/blob/main/LICENSE)
 
 ## Documentation
 
-You can find [here](https://github.com/breno-jesus-fernandes/cronus-eater/docs/)
+You can find [here](https://github.com/breno-jesus-fernandes/cronus-eater/tree/main/docs)
 
 
  
