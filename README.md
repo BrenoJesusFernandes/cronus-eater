@@ -49,7 +49,7 @@ times_series_df.head()
 
 ## Where to get it
 
-The source code is currently hosted on GitHub at: <https://github.com/BrenoJesusFernandes/cronus-eater>
+The source code is currently hosted on GitHub at: <https://github.com/breno-jesus-fernandes/cronus-eater>
 
 Binary installers for the latest released version is going to available at the [Python Package Index (PyPI)](https://pypi.org/project/cronus-eater).
 
@@ -57,7 +57,7 @@ Binary installers for the latest released version is going to available at the [
 ```sh
 pip install cronus-eater
 # or through poetry
-poetry add cronus-eater@latest
+poetry add cronus-eater
 ```
 
 ## License
