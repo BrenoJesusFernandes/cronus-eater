@@ -7,8 +7,6 @@ import pytest
 from cronus_eater import _normalizer
 
 
-
-
 def test_norm_header():
     # Get Source test
     source_dataframe = pd.read_excel(
