@@ -70,9 +70,9 @@ poetry add cronus-eater
 
 [MIT](https://github.com/breno-jesus-fernandes/cronus-eater/blob/main/LICENSE)
 
-## Documentation
+## Contributing to Cronus Eater
+All contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome. See https://github.com/breno-jesus-fernandes/cronus-eater/tree/main/docs for instructions.
 
-You can find [here](https://github.com/breno-jesus-fernandes/cronus-eater/tree/main/docs)
 
 
  
