@@ -19,7 +19,7 @@ def main():
     times_series_df = cronus_eater.extract_all(raw_dataframes)
 
     norm_index = (
-        times_series_df['Index']
+        times_series_df['Label Index']
         .str.strip()
         .map(
             lambda value: unidecode(

@@ -193,6 +193,24 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
             start_row : end_row + 1, start_column : end_column + 1
         ].copy()
 
+        if not time_series_df.empty:
+            dfs.append(time_series_df)
+
+        # Clean Time Series from raw dataframe
+        df = clean_time_series_from_raw_df(df, metadata)
+        df_order += 1
+
+    return dfs
+
+
+def extract(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
+    raw_dfs = extract_raw(raw_dataframe)
+
+    if len(raw_dfs) == 0:
+        return pd.DataFrame()
+
+    norm_dfs = []
+    for index, time_series_df in enumerate(raw_dfs):
         time_series_df = (
             time_series_df.apply(lambda row: clean_garbage_row(row), axis=1)
             .dropna(how='all', axis=0)
@@ -206,7 +224,7 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
             lambda value: _normalizer.norm_blank_value(value)
         )
 
-        time_series_df.iloc[0, 0] = 'Index'
+        time_series_df.iloc[0, 0] = 'Label Index'
         time_series_df.iloc[0, :] = time_series_df.iloc[0, :].map(
             lambda value: _normalizer.norm_header(value)
         )
@@ -219,30 +237,17 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
         time_series_df.reset_index(inplace=True)
         time_series_df.rename(columns={'index': 'Numeric Index'}, inplace=True)
 
-        time_series_df['Order'] = df_order
+        time_series_df['Order'] = index + 1
 
         time_series_df = pd.melt(
             time_series_df,
-            id_vars=['Numeric Index', 'Index', 'Order'],
+            id_vars=['Numeric Index', 'Label Index', 'Order'],
             var_name='Time',
             value_name='Value',
         )
+        norm_dfs.append(time_series_df.copy())
 
-        dfs.append(time_series_df)
-
-        # Clean Time Series from raw dataframe
-        df = clean_time_series_from_raw_df(df, metadata)
-        df_order += 1
-
-    return dfs
-
-
-def extract(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
-    dfs = extract_raw(raw_dataframe)
-    if len(dfs) == 0:
-        return pd.DataFrame()
-
-    return pd.concat(dfs, ignore_index=True)
+    return pd.concat(norm_dfs, ignore_index=True)
 
 
 def extract_all(
