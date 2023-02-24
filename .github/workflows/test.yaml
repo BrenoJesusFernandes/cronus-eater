@@ -19,7 +19,7 @@ jobs:
   released:
     runs-on: ${{ matrix.os }}
     concurrency:
-      group: ${{ github.ref }}-${{ matrix.os }}-${{ matrix.python-version }}
+      group: ${{ matrix.os }}-${{ matrix.python-version }}
       cancel-in-progress: true
     timeout-minutes: 20
     strategy:
