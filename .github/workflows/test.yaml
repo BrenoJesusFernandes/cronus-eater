@@ -17,9 +17,6 @@ on:
 
 jobs:
   released:
-    concurrency:
-      group: ${{ github.workflow }}
-      cancel-in-progress: true
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     strategy:
