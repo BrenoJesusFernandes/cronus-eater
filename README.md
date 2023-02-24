@@ -47,7 +47,7 @@ times_series_df.head()
 
 |     | Numeric Index | Label Index | Table Order | Time | Value   |
 | --- | ------------- | ---------   | ----------- | ---- | ------- |
-| 0   |  4            | Cash Flow   | 1           | 4Q22 | 302.81  |
+| 0   |  4            | Cash Flow   | 1           | 3Q22 | 302.81  |
 | 1   |  4            | Cash Flow   | 1           | 2Q22 | 255.11  |
 | 2   |  4            | Cash Flow   | 1           | 1Q22 | 106.12  |
 | 3   |  4            | Cash Flow   | 1           | 2017 | 900.00  |
