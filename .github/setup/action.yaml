@@ -3,8 +3,10 @@ name: Install project dependencies
 inputs:
   python-version:
     required: true
+    description: python version
   os:
     required: true
+    description: os version
 
 runs:
   using: composite
