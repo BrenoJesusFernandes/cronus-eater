@@ -1,24 +1,24 @@
-name: 'Test'
+name: "Test"
 
 on:
   push:
     paths:
-      - '**.py'
-      - '**.pyi'
-      - 'pyproject.toml'
-      - '.github/**.yaml'
+      - "**.py"
+      - "**.pyi"
+      - "pyproject.toml"
+      - ".github/**.yaml"
   pull_request:
     paths:
-      - '**.py'
-      - '**.pyi'
-      - 'pyproject.toml'
-      - '.github/**.yaml'
+      - "**.py"
+      - "**.pyi"
+      - "pyproject.toml"
+      - ".github/**.yaml"
   workflow_dispatch:
 
 jobs:
   released:
     concurrency:
-      group: ${{ github.ref }}
+      group: ${{ github.head_ref || github.run_id }}
       cancel-in-progress: true
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
@@ -26,22 +26,19 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Install project dependencies
-      uses: ./.github/setup
-      with:
-        os: ${{ matrix.os }}
-        python-version: ${{ matrix.python-version }}
+      - name: Install project dependencies
+        uses: ./.github/setup
 
-    - name: Check Blue Style
-      run: poetry run blue --check cronus_eater tests
-    
-    - name: Check Isort Style
-      run: poetry run isort --check cronus_eater tests
+      - name: Check Blue Style
+        run: poetry run blue --check cronus_eater tests
 
-    - name: Run pytest
-      run: poetry run pytest
+      - name: Check Isort Style
+        run: poetry run isort --check cronus_eater tests
+
+      - name: Run pytest
+        run: poetry run pytest
