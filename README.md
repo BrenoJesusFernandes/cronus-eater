@@ -32,7 +32,7 @@ raw_dataframe.head()
 | 1   | NaN | Holdings Ltd.               | NaN | NaN |   NaN    |   NaN    |   NaN   |    NaN   |    NaN    | NaN |
 | 2   | NaN | NaN                         | NaN | NaN |   3Q22   |   2Q22   |   NaN   |   1Q22   |   2022    | NaN |
 | 3   | NaN | Amounts in thousands of R$  | NaN | NaN |   R$     |   R$     |   NaN   |    R$    |    R$     | NaN |
-| 4   | NaN | Cash Flow                   | NaN | NaN | $500.23  | $302.81  | $255.11 | $106.12  |  $900.00  | NaN |
+| 4   | NaN | Cash Flow                   | NaN | NaN | $500.23  | $302.81  |   NaN   | $106.12  |  $900.00  | NaN |
 
 ### Let's devours this times series  
 
@@ -47,10 +47,10 @@ times_series_df.head()
 
 |     | Numeric Index | Label Index | Table Order | Time | Value   |
 | --- | ------------- | ---------   | ----------- | ---- | ------- |
-| 0   |  4            | Cash Flow   | 1           | 3Q22 | 302.81  |
-| 1   |  4            | Cash Flow   | 1           | 2Q22 | 255.11  |
+| 0   |  4            | Cash Flow   | 1           | 3Q22 | 500.23  |
+| 1   |  4            | Cash Flow   | 1           | 2Q22 | 302.81  |
 | 2   |  4            | Cash Flow   | 1           | 1Q22 | 106.12  |
-| 3   |  4            | Cash Flow   | 1           | 2017 | 900.00  |
+| 3   |  4            | Cash Flow   | 1           | 2022 | 900.00  |
 
 
 ## Where to get it
