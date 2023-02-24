@@ -39,7 +39,7 @@ raw_dataframe.head()
 ```python
 
 import cronus_eater
-times_series_df = cronus_eater.find_time_series(raw_dataframe)
+times_series_df = cronus_eater.extract(raw_dataframe)
 times_series_df.head()
 
 ```

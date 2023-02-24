@@ -147,8 +147,7 @@ def clean_gargabe_table(
     return df.copy()
 
 
-def find_time_series(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
-
+def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
     df = raw_dataframe.copy()
     dfs = []
     df_order = 1
@@ -189,7 +188,7 @@ def find_time_series(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
             start_row,
             end_row,
         )
-        # Copy Time Series From raw dataframe
+        # Copy Time Series from raw dataframe
         time_series_df = df.iloc[
             start_row : end_row + 1, start_column : end_column + 1
         ].copy()
@@ -235,19 +234,22 @@ def find_time_series(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
         df = clean_time_series_from_raw_df(df, metadata)
         df_order += 1
 
+    return dfs
+
+
+def extract(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
+    dfs = extract_raw(raw_dataframe)
     if len(dfs) == 0:
         return pd.DataFrame()
 
     return pd.concat(dfs, ignore_index=True)
 
 
-def find_all_time_series(
-    raw_dataframes: Dict[Union[int, str], pd.DataFrame]
-) -> pd.DataFrame:
+def extract_all(raw_dataframes: Dict[str | int, pd.DataFrame]) -> pd.DataFrame:
     all_time_series = []
 
     for sheet_name, raw_df in raw_dataframes.items():
-        df = find_time_series(raw_df)
+        df = extract(raw_df)
         if not df.empty:
             df['Sheet Name'] = sheet_name
             all_time_series.append(df)

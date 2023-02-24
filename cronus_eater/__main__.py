@@ -5,17 +5,18 @@ import pandas as pd
 from loguru import logger
 from unidecode import unidecode
 
-from cronus_eater import _converter, _extractor
+import cronus_eater
+from cronus_eater import _converter
 
 
 def main():
     logger.info('Reading File ...')
     raw_dataframes = pd.read_excel(
-        'tests/data/nubank_4Q22.xlsx', header=None, sheet_name=None
+        'tests/data/nubank_3Q22.xlsx', header=None, sheet_name=None
     )
 
     logger.info('Processing Time Series ...')
-    times_series_df = _extractor.find_all_time_series(raw_dataframes)
+    times_series_df = cronus_eater.extract_all(raw_dataframes)
 
     norm_index = (
         times_series_df['Index']
