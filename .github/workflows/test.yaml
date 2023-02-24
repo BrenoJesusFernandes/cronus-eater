@@ -18,7 +18,7 @@ on:
 jobs:
   released:
     concurrency:
-      group: ${{ github.head_ref || github.run_id }}
+      group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
