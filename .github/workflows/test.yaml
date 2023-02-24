@@ -14,14 +14,12 @@ on:
       - 'pyproject.toml'
       - '.github/**.yaml'
   workflow_dispatch:
-    paths:
-      - '**.py'
-      - '**.pyi'
-      - 'pyproject.toml'
-      - '.github/**.yaml'
 
 jobs:
   released:
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     strategy:
@@ -35,9 +33,6 @@ jobs:
 
     - name: Install project dependencies
       uses: ./.github/setup
-      with:
-        os: ${{ matrix.os }}
-        python-version: ${{ matrix.python-version }}
 
     - name: Check Blue Style
       run: poetry run blue --check cronus_eater tests
