@@ -245,7 +245,9 @@ def extract(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
     return pd.concat(dfs, ignore_index=True)
 
 
-def extract_all(raw_dataframes: Dict[str | int, pd.DataFrame]) -> pd.DataFrame:
+def extract_all(
+    raw_dataframes: Dict[Union[str, int], pd.DataFrame]
+) -> pd.DataFrame:
     all_time_series = []
 
     for sheet_name, raw_df in raw_dataframes.items():
