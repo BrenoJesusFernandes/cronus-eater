@@ -203,7 +203,7 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
     return dfs
 
 
-def extract(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
+def extract_from_dataframe(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
     raw_dfs = extract_raw(raw_dataframe)
 
     if len(raw_dfs) == 0:
@@ -250,15 +250,22 @@ def extract(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
     return pd.concat(norm_dfs, ignore_index=True)
 
 
-def extract_all(
+def extract_from_all_dataframes(
     raw_dataframes: Dict[Union[str, int], pd.DataFrame]
 ) -> pd.DataFrame:
     all_time_series = []
 
     for sheet_name, raw_df in raw_dataframes.items():
-        df = extract(raw_df)
+        df = extract_from_dataframe(raw_df)
         if not df.empty:
             df['Sheet Name'] = sheet_name
             all_time_series.append(df)
 
     return pd.concat(all_time_series, ignore_index=True)
+
+
+def extract(target: Union[pd.DataFrame, Dict[Union[str, int], pd.DataFrame]]):
+    if isinstance(target, pd.DataFrame):
+        return extract_from_dataframe(target)
+    else:
+        return extract_from_all_dataframes(target)

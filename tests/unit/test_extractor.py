@@ -122,3 +122,18 @@ def test_clean_garbage_row():
 
     row = pd.Series(['sm', 'asdasd', 1, 2, 3, 4])
     null_row.equals(_extractor.clean_garbage_row(row))
+
+
+@pytest.mark.skip(reason='Current in development')
+def test_extract_raw():
+    ...
+
+
+@pytest.mark.skip(reason='Current in development')
+def test_extract_from_dataframe():
+    ...
+
+
+@pytest.mark.skip(reason='Current in development')
+def test_extract_from_all_dataframes():
+    ...
