@@ -1,7 +1,7 @@
 # Cronus Eater: A simple tool to get time series from spreadsheets
 
 <div align="center">
-  <img width="450" height="278" src="https://raw.githubusercontent.com/breno-jesus-fernandes/cronus-eater/5e3a88709eeb845fa24b1dff5b9d3039a88c3d9c/docs/img/cronus-eater-logo.png"><br>
+  <img width="450" height="278" src="https://raw.githubusercontent.com/breno-jesus-fernandes/cronus-eater/main/docs/img/cronus-eater-logo.png"><br>
 </div>
 
 [![Test](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/test.yaml/badge.svg)](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/test.yaml)
