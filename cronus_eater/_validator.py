@@ -9,7 +9,7 @@ import pandas as pd
 def is_blank_value(value: Any) -> bool:
     """
      Verify if a any given value is a blank value.
-     A value blank could be: pandas or numpy NA, empty string or string without meaning like -,none, null and nan.
+     A blank value could be: pandas or numpy NA, empty string or string without meaning like -,none, null and nan.
 
     :param Any value: Any value in pandas dataframe
     :return: A boolean if the value matchs any criteria
