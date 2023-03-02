@@ -63,7 +63,10 @@ Binary installers for the latest released version is going to available at the [
 
 ```sh
 pip install cronus-eater
-# or through poetry
+```
+### or throught poetry
+
+```sh
 poetry add cronus-eater
 ```
 
