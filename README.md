@@ -5,7 +5,7 @@
 </div>
 
 [![Test](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/test.yaml/badge.svg)](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/test.yaml)
-[![codecov](https://codecov.io/gh/breno-jesus-fernandes/cronus-eater/branch/main/graph/badge.svg?token=OVQQF4IQY2)](https://codecov.io/gh/dunossauro/notas-musicais)
+[![codecov](https://codecov.io/gh/breno-jesus-fernandes/cronus-eater/branch/main/graph/badge.svg?token=KDEDMQ6B2E)](https://codecov.io/gh/breno-jesus-fernandes/cronus-eater)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/cronus-eater.svg)](https://pypi.org/project/cronus-eater/)
 [![Package Status](https://img.shields.io/pypi/status/cronus-eater.svg)](https://pypi.org/project/cronus-eater/)
 [![Python: 3.7 | 3.8 | 3.9 | 3.10 | 3.11](https://img.shields.io/badge/Python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue.svg)](https://pypi.org/project/cronus-eater/)
@@ -28,13 +28,13 @@ raw_dataframe.head()
 
 ```
 
-|     |  0  |              1              |  2  |  3  |    4     |     5    |    6    |    7     |    8      |  9  |
-| --- | --- | --------------------------- | --- | --- | -------  | -------  | ------  | -------  | -------   | ----|
-| 0   | NaN | NaN                         | NaN | NaN |   NaN    |   NaN    |   NaN   |    NaN   |    NaN    | NaN |
-| 1   | NaN | Holdings Ltd.               | NaN | NaN |   NaN    |   NaN    |   NaN   |    NaN   |    NaN    | NaN |
-| 2   | NaN | NaN                         | NaN | NaN |   3Q22   |   2Q22   |   NaN   |   1Q22   |   2022    | NaN |
-| 3   | NaN | Amounts in thousands of R$  | NaN | NaN |   R$     |   R$     |   NaN   |    R$    |    R$     | NaN |
-| 4   | NaN | Cash Flow                   | NaN | NaN | $500.23  | $302.81  |   NaN   | $106.12  |  $900.00  | NaN |
+|     | 0   | 1                          | 2   | 3   | 4       | 5       | 6   | 7       | 8       | 9   |
+| --- | --- | -------------------------- | --- | --- | ------- | ------- | --- | ------- | ------- | --- |
+| 0   | NaN | NaN                        | NaN | NaN | NaN     | NaN     | NaN | NaN     | NaN     | NaN |
+| 1   | NaN | Holdings Ltd.              | NaN | NaN | NaN     | NaN     | NaN | NaN     | NaN     | NaN |
+| 2   | NaN | NaN                        | NaN | NaN | 3Q22    | 2Q22    | NaN | 1Q22    | 2022    | NaN |
+| 3   | NaN | Amounts in thousands of R$ | NaN | NaN | R$      | R$      | NaN | R$      | R$      | NaN |
+| 4   | NaN | Cash Flow                  | NaN | NaN | $500.23 | $302.81 | NaN | $106.12 | $900.00 | NaN |
 
 ### Let's devours this times series  
 
@@ -47,12 +47,12 @@ times_series_df.head()
 ```
 
 
-|     | Numeric Index | Label Index | Table Order | Time | Value   |
-| --- | ------------- | ---------   | ----------- | ---- | ------- |
-| 0   |  4            | Cash Flow   | 1           | 3Q22 | 500.23  |
-| 1   |  4            | Cash Flow   | 1           | 2Q22 | 302.81  |
-| 2   |  4            | Cash Flow   | 1           | 1Q22 | 106.12  |
-| 3   |  4            | Cash Flow   | 1           | 2022 | 900.00  |
+|     | Numeric Index | Label Index | Table Order | Time | Value  |
+| --- | ------------- | ----------- | ----------- | ---- | ------ |
+| 0   | 4             | Cash Flow   | 1           | 3Q22 | 500.23 |
+| 1   | 4             | Cash Flow   | 1           | 2Q22 | 302.81 |
+| 2   | 4             | Cash Flow   | 1           | 1Q22 | 106.12 |
+| 3   | 4             | Cash Flow   | 1           | 2022 | 900.00 |
 
 
 ## Where to get it
