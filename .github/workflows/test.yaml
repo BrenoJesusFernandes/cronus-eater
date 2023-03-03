@@ -45,3 +45,12 @@ jobs:
 
       - name: Run pytest
         run: poetry run pytest
+      
+      - name: Run coverage test
+        run: poetry run pytest --cov=cronus_eater tests/
+      
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+

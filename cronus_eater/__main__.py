@@ -12,7 +12,7 @@ from cronus_eater import _converter
 def main():
     logger.info('Reading File ...')
     raw_dataframes = pd.read_excel(
-        'tests/data/nubank_3Q22.xlsx', header=None, sheet_name=None
+        'tests/unit/data/nubank_3Q22.xlsx', header=None, sheet_name=None
     )
 
     logger.info('Processing Time Series ...')
