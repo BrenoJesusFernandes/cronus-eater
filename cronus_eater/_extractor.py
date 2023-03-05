@@ -276,6 +276,38 @@ def extract_from_all_raw_dataframes(
     return all_raw_df
 
 
+@overload
+def extract(
+    target: Union[pd.DataFrame, Dict[Union[str, int], pd.DataFrame]],
+    mode: Literal['tidy'],
+) -> pd.DataFrame:
+    ...
+
+
+@overload
+def extract(
+    target: Union[pd.DataFrame, Dict[Union[str, int], pd.DataFrame]],
+    mode: Literal['tidy'] = 'tidy',
+) -> pd.DataFrame:
+    ...
+
+
+@overload
+def extract(
+    target: Dict[Union[str, int], pd.DataFrame],
+    mode: Literal['raw'] = 'raw',
+) -> Dict[Union[str, int], List[pd.DataFrame]]:
+    ...
+
+
+@overload
+def extract(
+    target: pd.DataFrame,
+    mode: Literal['raw'] = 'raw',
+) -> Dict[Union[str, int], List[pd.DataFrame]]:
+    ...
+
+
 def extract(
     target: Union[pd.DataFrame, Dict[Union[str, int], pd.DataFrame]],
     mode: Union[Literal['tidy'], Literal['raw']] = 'tidy',
