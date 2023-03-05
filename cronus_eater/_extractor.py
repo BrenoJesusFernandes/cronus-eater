@@ -154,7 +154,7 @@ def clean_gargabe_table(
 def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
     df = _normalizer.norm_df_to_extraction(raw_dataframe)
     dfs: List[pd.DataFrame] = []
-    
+
     df_order = 1
     dead_lock_detector = 0
 
