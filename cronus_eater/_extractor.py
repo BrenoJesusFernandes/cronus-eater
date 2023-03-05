@@ -1,7 +1,8 @@
-from typing import Any, Dict, List, Literal, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 import numpy as np
 import pandas as pd
+from typing_extensions import Literal
 
 from cronus_eater import _normalizer, _validator
 from cronus_eater.model import TimeSeries, TimeSeriesMetadata
