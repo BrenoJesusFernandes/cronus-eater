@@ -107,11 +107,15 @@ def to_literal_blank(value: Any) -> Any:
 
 
 def clean_time_series_from_raw_df(
-    df: pd.DataFrame, metadata: TimeSeriesMetadata
+    df: pd.DataFrame,
+    start_row: int,
+    end_row: int,
+    start_column: int,
+    end_column: int,
 ) -> pd.DataFrame:
     df.iloc[
-        metadata.start_row : metadata.end_row + 1,
-        metadata.start_column : metadata.end_column + 1,
+        start_row : end_row + 1,
+        start_column : end_column + 1,
     ] = np.nan
     return df.copy()
 
@@ -148,10 +152,10 @@ def clean_gargabe_table(
 
 
 def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
-    df = raw_dataframe.copy()
-    dfs = []
+    df = _normalizer.norm_df_to_extraction(raw_dataframe)
+    dfs: List[pd.DataFrame] = []
+    
     df_order = 1
-
     dead_lock_detector = 0
 
     while _validator.is_there_time_series(df, dead_lock_detector):
@@ -180,14 +184,6 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
         else:
             start_row = header_row
 
-        metadata = TimeSeriesMetadata(
-            'whatever',
-            'whatever',
-            start_column,
-            end_column,
-            start_row,
-            end_row,
-        )
         # Copy Time Series from raw dataframe
         time_series_df = df.iloc[
             start_row : end_row + 1, start_column : end_column + 1
@@ -197,7 +193,9 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
             dfs.append(time_series_df)
 
         # Clean Time Series from raw dataframe
-        df = clean_time_series_from_raw_df(df, metadata)
+        df = clean_time_series_from_raw_df(
+            df, start_row, end_row, start_column, end_column
+        )
         df_order += 1
 
     return dfs

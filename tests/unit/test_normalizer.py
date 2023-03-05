@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 
 from cronus_eater import _normalizer
+from cronus_eater.exceptions import EmptyDataFrame
 
 
 def test_norm_header():
@@ -33,3 +34,33 @@ def test_norm_header():
     )
 
     assert source_header.equals(target_header)
+
+
+@pytest.mark.xfail(raises=EmptyDataFrame)
+def test_norm_df_to_extraction_blank():
+    assert _normalizer.norm_df_to_extraction(pd.DataFrame())
+    assert _normalizer.norm_df_to_extraction(
+        pd.DataFrame(['', pd.NA, np.nan, '-'])
+    )
+
+
+def test_norm_df_to_extraction():
+    source_df = pd.DataFrame(
+        {
+            'First': [' - ', '1', '2', '3', '4'],
+            'Second': ['nan', '1', '2', '3', '4'],
+            'Third': [None, '1', '2', '3', '4'],
+            'Fourth': [np.nan, '1', '2', '3', '4'],
+        }
+    )
+
+    target_df = pd.DataFrame(
+        {
+            0: ['First', pd.NA, '1', '2', '3', '4'],
+            1: ['Second', pd.NA, '1', '2', '3', '4'],
+            2: ['Third', pd.NA, '1', '2', '3', '4'],
+            3: ['Fourth', pd.NA, '1', '2', '3', '4'],
+        }
+    )
+    norm_df = _normalizer.norm_df_to_extraction(source_df)
+    assert norm_df.equals(target_df)

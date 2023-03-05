@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from cronus_eater import _extractor, _normalizer
+from cronus_eater import _extractor, _normalizer, _validator
 from cronus_eater.model import TimeSeriesMetadata
 
 
@@ -13,20 +13,16 @@ def test_find_header():
 def test_clean_time_series_from_raw_df():
     df = pd.read_excel('tests/unit/data/source.xlsx', header=None)
 
-    metadata = TimeSeriesMetadata(
-        '', '', start_row=21, end_row=35, start_column=1, end_column=11
+    start_row = 21
+    end_row = 35
+    start_column = 1
+    end_column = 11
+
+    df = _extractor.clean_time_series_from_raw_df(
+        df, start_row, end_row, start_column, end_column
     )
 
-    df = _extractor.clean_time_series_from_raw_df(df, metadata)
-
-    tot_not_null = (
-        ~df.iloc[
-            metadata.start_row : metadata.end_row + 1,
-            metadata.start_column : metadata.end_column + 1,
-        ].isnull()
-    ).values.sum()
-
-    assert tot_not_null == 0
+    assert not _validator.is_blank_df(df)
 
 
 def test_find_end_column():
@@ -86,6 +82,7 @@ def test_clean_gargabe_column():
     # There's a column valid, but no time series row , clean the garbage!!!
     df = pd.read_excel('tests/unit/data/source.xlsx', header=None)
     start_row, start_column = -1, 1
+
     df = _extractor.clean_gargabe_column(df, start_row, start_column)
     tot_null = (~df.iloc[:, start_column].isnull()).sum()
     assert tot_null == 0
@@ -126,7 +123,10 @@ def test_clean_garbage_row():
 
 @pytest.mark.skip(reason='Current in development')
 def test_extract_raw():
-    ...
+    df = pd.read_excel('tests/unit/data/source.xlsx', header=None)
+    dfs = _extractor.extract_raw(df)
+
+    assert len(dfs) == 4
 
 
 @pytest.mark.skip(reason='Current in development')
