@@ -121,7 +121,6 @@ def test_clean_garbage_row():
     null_row.equals(_extractor.clean_garbage_row(row))
 
 
-@pytest.mark.skip(reason='Current in development')
 def test_extract_raw():
     df = pd.read_excel('tests/unit/data/source.xlsx', header=None)
     dfs = _extractor.extract_raw(df)
