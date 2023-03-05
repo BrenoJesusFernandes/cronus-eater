@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, List, Literal, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -151,11 +151,14 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
     df = raw_dataframe.copy()
     dfs = []
     df_order = 1
+
+    dead_lock_detector = 0
+
     while True:
 
         # If there's no more value, finish the search
         tot_not_null = (~df.isnull()).values.sum()
-        if tot_not_null == 0:
+        if tot_not_null == 0 or dead_lock_detector > 1:
             break
 
         start_row, start_column = find_start_row_column(df)
@@ -163,6 +166,7 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
         # If can find start row, clean gargabe column and starts again the search
         if start_row == -1 and start_column >= 0:
             df = clean_gargabe_column(df, start_row, start_column)
+            dead_lock_detector += 1
             continue
         # If there's no start column finish the search
         elif start_row == -1 and start_column == -1:
@@ -176,6 +180,7 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
             df = clean_gargabe_table(
                 df, start_row, start_column, end_row, end_column
             )
+            dead_lock_detector += 1
             continue
         else:
             start_row = header_row
@@ -264,8 +269,33 @@ def extract_from_all_dataframes(
     return pd.concat(all_time_series, ignore_index=True)
 
 
-def extract(target: Union[pd.DataFrame, Dict[Union[str, int], pd.DataFrame]]):
-    if isinstance(target, pd.DataFrame):
+def extract_from_all_raw_dataframes(
+    raw_dataframes: Dict[Union[str, int], pd.DataFrame]
+) -> Dict[Union[str, int], List[pd.DataFrame]]:
+
+    all_raw_df: Dict[Union[str, int], List[pd.DataFrame]] = {}
+
+    for sheet_name, raw_df in raw_dataframes.items():
+        dfs = extract_raw(raw_df)
+        if len(dfs) > 0:
+            all_raw_df[sheet_name] = dfs
+
+    return all_raw_df
+
+
+def extract(
+    target: Union[pd.DataFrame, Dict[Union[str, int], pd.DataFrame]],
+    mode: Union[Literal['tidy'], Literal['raw']] = 'tidy',
+) -> Union[
+    pd.DataFrame, List[pd.DataFrame], Dict[Union[str, int], List[pd.DataFrame]]
+]:
+
+    if isinstance(target, pd.DataFrame) and mode == 'tidy':
         return extract_from_dataframe(target)
+    elif isinstance(target, pd.DataFrame):
+        return extract_raw(target)
     else:
-        return extract_from_all_dataframes(target)
+        if mode == 'tidy':
+            return extract_from_all_dataframes(target)
+        else:
+            return extract_from_all_raw_dataframes(target)
