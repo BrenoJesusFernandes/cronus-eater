@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Tuple, Union
 
 import numpy as np
 import pandas as pd
-from typing_extensions import Literal
+from typing_extensions import Literal, overload
 
 from cronus_eater import _normalizer, _validator
 from cronus_eater.model import TimeSeries, TimeSeriesMetadata
@@ -153,22 +153,22 @@ def clean_gargabe_table(
 
 
 def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
-    df = _normalizer.norm_df_to_extraction(raw_dataframe)
-    dfs: List[pd.DataFrame] = []
 
-    df_order = 1
+    df = _normalizer.norm_df_to_extraction(raw_dataframe)
+
+    dfs: List[pd.DataFrame] = []
     dead_lock_detector = 0
 
     while _validator.is_there_time_series(df, dead_lock_detector):
 
         start_row, start_column = find_start_row_column(df)
 
-        # If can find start row, clean gargabe column and starts again the search
+        # If can find start row, but no start_column, clean gargabe column and starts again the search
         if start_row == -1 and start_column >= 0:
             df = clean_gargabe_column(df, start_row, start_column)
             dead_lock_detector += 1
             continue
-        # If there's no start column finish the search
+        # If there's no start row and column ends the search
         elif start_row == -1 and start_column == -1:
             break
 
@@ -197,7 +197,6 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
         df = clean_time_series_from_raw_df(
             df, start_row, end_row, start_column, end_column
         )
-        df_order += 1
 
     return dfs
 
@@ -229,7 +228,7 @@ def extract_from_dataframe(raw_dataframe: pd.DataFrame) -> pd.DataFrame:
         )
 
         time_series_df = time_series_df.rename(
-            columns=time_series_df.iloc[0]
+            columns=time_series_df.iloc[0].to_dict()
         ).drop(time_series_df.index[0])
 
         time_series_df.fillna(0, inplace=True)
