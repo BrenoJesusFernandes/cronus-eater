@@ -5,6 +5,9 @@ from typing import Any, List, Union
 import numpy as np
 import pandas as pd
 
+from cronus_eater import _converter
+from cronus_eater.exceptions import EmptyDataFrame, InvalidDeadLockNumber
+
 
 def is_blank_value(value: Any) -> bool:
     """
@@ -173,3 +176,35 @@ def is_date_time(value: Any) -> bool:
         return True
 
     return False
+
+
+def is_blank_df(df: pd.DataFrame) -> bool:
+    """
+    Verify if a dataframe there's just blank values
+    :param pd.DataFrame df: dataframe with blank values
+    return: A boolean if this df just has blank values
+    """
+    if df.empty:
+        return False
+    norm_df = df.applymap(lambda value: _converter.blank_to_na(value))
+    return (~norm_df.isna()).values.sum() == 0
+
+
+def is_there_time_series(df: pd.DataFrame, dead_lock_detector: int) -> bool:
+    """
+    Verify if there's times series in a given dataframe.
+
+    :param pd.DataFrame df: dataframe where could have one or more a time series
+    :param int dead_lock_detector: Number of times which the program could not find a time series in the same area
+    :raise EmptyDataFram: if a empty dataframe was passed
+    :raise InvalidDeadLockNumber: if negative dead lock is passed
+    :return: A boolean if it should continue the search for the time series
+    """
+
+    if df.empty:
+        raise EmptyDataFrame()
+
+    if dead_lock_detector < 0:
+        raise InvalidDeadLockNumber()
+
+    return not is_blank_df(df) and dead_lock_detector in (0, 1)

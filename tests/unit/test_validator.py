@@ -2,8 +2,10 @@ from datetime import datetime
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from cronus_eater import _validator
+from cronus_eater.exceptions import EmptyDataFrame, InvalidDeadLockNumber
 
 
 def test_is_blank_value():
@@ -164,3 +166,40 @@ def test_is_date_time():
 
     assert not _validator.is_date_time(' 13M22 ')
     assert not _validator.is_date_time(' 13M2022 ')
+
+
+@pytest.mark.xfail(raises=EmptyDataFrame)
+def test_is_time_series_empty_df():
+    assert _validator.is_there_time_series(pd.DataFrame(), 1)
+
+
+@pytest.mark.xfail(raises=InvalidDeadLockNumber)
+def test_is_time_series_negative_number():
+    assert _validator.is_there_time_series(pd.DataFrame([1, 2, 3, 4, 5]), -1)
+
+
+def test_is_time_series_with_no_dead_lock():
+    assert _validator.is_there_time_series(pd.DataFrame([1, 2, 3, 4, 5]), 0)
+    assert _validator.is_there_time_series(pd.DataFrame([1, 2, 3, 4, 5]), 1)
+
+
+def test_is_time_series_with_dead_lock():
+    assert not _validator.is_there_time_series(
+        pd.DataFrame([1, 2, 3, 4, 5]), 2
+    )
+
+
+def test_is_time_series_with_blank_df():
+    assert not _validator.is_there_time_series(
+        pd.DataFrame([pd.NA, np.NAN, '', '-', None]), 0
+    )
+
+
+def test_not_is_blank_df():
+    assert not _validator.is_blank_df(
+        pd.DataFrame([pd.NA, np.NAN, '', '0', None])
+    )
+
+
+def test_is_blank_df():
+    assert _validator.is_blank_df(pd.DataFrame([pd.NA, np.NAN, '', '-', None]))

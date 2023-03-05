@@ -154,12 +154,7 @@ def extract_raw(raw_dataframe: pd.DataFrame) -> List[pd.DataFrame]:
 
     dead_lock_detector = 0
 
-    while True:
-
-        # If there's no more value, finish the search
-        tot_not_null = (~df.isnull()).values.sum()
-        if tot_not_null == 0 or dead_lock_detector > 1:
-            break
+    while _validator.is_there_time_series(df, dead_lock_detector):
 
         start_row, start_column = find_start_row_column(df)
 
