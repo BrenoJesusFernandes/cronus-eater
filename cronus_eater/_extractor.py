@@ -296,15 +296,7 @@ def extract(
 def extract(
     target: Dict[Union[str, int], pd.DataFrame],
     mode: Literal['raw'] = 'raw',
-) -> Dict[Union[str, int], List[pd.DataFrame]]:
-    ...
-
-
-@overload
-def extract(
-    target: pd.DataFrame,
-    mode: Literal['raw'] = 'raw',
-) -> Dict[Union[str, int], List[pd.DataFrame]]:
+) -> List[pd.DataFrame]:
     ...
 
 
