@@ -166,13 +166,17 @@ def is_date_time(value: Any) -> bool:
 
     text = str(value).strip()
     if re.match(
-        r'(\b(0?[1-9]|[12]\d|30|31)[^\w\d\r\n:](0?[1-9]|1[0-2])[^\w\d\r\n:](\d{4}|\d{2})\b)|(\b(0?[1-9]|1[0-2])[^\w\d\r\n:](0?[1-9]|[12]\d|30|31)[^\w\d\r\n:](\d{4}|\d{2})\b)',
+        r'(\b(0?[1-9]|[12]\d|30|31)[^\w\d\r\n:](0?[1-9]|1[0-2])[^\w\d\r\n:](\d{4}|\d{2})\b)|(\b(0?[1-9]|1[0-2])[^\w\d\r\n:](0?[1-9]|[12]\d|30|31)[^\w\d\r\n:](\d{4}|\d{2})\b)$',
         text,
     ):
         return True
-    elif re.match(r'[1-4]([Q]|[T])[\s]?[1-2]?[0-9]?[0-9][0-9]', text):
+    elif re.match(r'[1-4]([Q]|[T])[\s]?[1-2]?[0-9]?[0-9][0-9]$', text):
         return True
-    elif re.match(r'[1-12][M][\s]?[1-2]?[0-9]?[0-9][0-9]', text):
+    elif re.match(r'[1-12][M][\s]?[1-2]?[0-9]?[0-9][0-9]$', text):
+        return True
+    elif re.match(
+        r'([a-z]|[A-Z]){3}([/]|[|]|[\s]|[-])([0-9]{2})?[0-9]{2}$', text
+    ):
         return True
 
     return False

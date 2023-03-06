@@ -96,7 +96,7 @@ def find_end_row_column(
 
 def clean_garbage_row(row: pd.Series) -> pd.Series:
     qtd_text = row.map(lambda value: _validator.is_text(value)).sum()
-    if qtd_text >= 2:
+    if qtd_text >= 3:
         return row.map(lambda value: pd.NA)
     return row
 

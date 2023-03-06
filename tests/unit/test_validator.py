@@ -167,6 +167,15 @@ def test_is_date_time():
     assert not _validator.is_date_time(' 13M22 ')
     assert not _validator.is_date_time(' 13M2022 ')
 
+    assert _validator.is_date_time(' Dez/22 ')
+    assert _validator.is_date_time(' Out/2022 ')
+    assert _validator.is_date_time(' Dez|22 ')
+    assert _validator.is_date_time(' Out|2022 ')
+    assert _validator.is_date_time(' Dez-22 ')
+    assert _validator.is_date_time(' Out-2022 ')
+    assert _validator.is_date_time(' Dez 22 ')
+    assert _validator.is_date_time(' Out 2022 ')
+
 
 @pytest.mark.xfail(raises=EmptyDataFrame)
 def test_is_time_series_empty_df():
