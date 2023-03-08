@@ -44,7 +44,7 @@ raw_dataframe.head()
 ### Let's devours this times series
 
 - No need to worry. You just need to bring the raw dataframe to Cronus Eater and you are ready to start the analysis.
-This way, you spend more time on what is really important.
+This way, you spend more time on what is really important for you.
 
 ```python
 
@@ -69,8 +69,8 @@ times_series_df.head()
 
 ```python
 
-a_lot_of_raw_dataframes = pd.read_excel('historical_series_3Q22.xlsx', sheet_name=None)
-times_series_df = cronus_eater.extract_many(a_lot_of_raw_dataframes)
+raw_dataframes = pd.read_excel('historical_series_3Q22.xlsx', sheet_name=None)
+times_series_df = cronus_eater.extract_many(raw_dataframes)
 times_series_df.head()
 
 ```
