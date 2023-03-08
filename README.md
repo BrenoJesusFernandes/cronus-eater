@@ -22,7 +22,7 @@ Extract and normalize time series from any spreadsheet with differents patterns.
 
 ### Where is the data I want?
 
-- There's just one place to get the information I want but ... it's mess! I need to spend some time to normalize this times series.
+- There's just one place to get the data I want, but ... it's mess! I need to spend some time to normalize this times series.
 
 ```python
 
@@ -43,8 +43,7 @@ raw_dataframe.head()
 
 ### Let's devours this times series
 
-- No need to worry, if the there's more than one time series in one sheet or if the column or header index is broken or several invalid values etc.
-You just need to bring the raw dataframe to Cronus Eater and you are ready to start the analysis.
+- No need to worry. You just need to bring the raw dataframe to Cronus Eater and you are ready to start the analysis.
 This way, you spend more time on what is really important.
 
 ```python
@@ -64,7 +63,7 @@ times_series_df.head()
 | 3   | 4             | Cash Flow   | 1           | 2022 | 900.00 |
 
 
-### But If I need to consume a lot of dataframes?
+### But If I need to consume a lot of dataframes from a spreedsheet?
 
 - We got you, just use "extract_many"
 
