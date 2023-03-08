@@ -66,11 +66,11 @@ times_series_df.head()
 
 ### But If I need to consume a lot of dataframes?
 
-- We got you 😊, just use "extract_many"
+- We got you, just use "extract_many"
 
 ```python
 
-raw_dataframe = pd.read_excel('historical_series_3Q22.xlsx', sheet_name=None)
+a_lot_of_raw_dataframes = pd.read_excel('historical_series_3Q22.xlsx', sheet_name=None)
 times_series_df = cronus_eater.extract_many(a_lot_of_raw_dataframes)
 times_series_df.head()
 
