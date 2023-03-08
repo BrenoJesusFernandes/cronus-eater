@@ -22,11 +22,13 @@ Extract and normalize time series from any spreadsheet with differents patterns.
 
 ### Where is the data I want?
 
+- There's just one place to get the information I want but ... it's mess! I need to spend some time to normalize this times series.
+
 ```python
 
 import pandas as pd
 
-raw_dataframe = pd.read_excel('historical_series_3Q22.xlsx')
+raw_dataframe = pd.read_excel('historical_series_3Q22.xlsx', sheet_name='random_sheet')
 raw_dataframe.head()
 
 ```
@@ -39,7 +41,11 @@ raw_dataframe.head()
 | 3   | NaN | Amounts in thousands of R$ | NaN | NaN | R$      | R$      | NaN | R$      | R$      | NaN |
 | 4   | NaN | Cash Flow                  | NaN | NaN | $500.23 | $302.81 | NaN | $106.12 | $900.00 | NaN |
 
-### Let's devours this times series  
+### Let's devours this times series
+
+- No need to worry, if the there's more than one time series in one sheet or if the column or header index is broken or several invalid values etc.
+You just need to bring the raw dataframe to Cronus Eater and you are ready to start the analysis.
+This way, you spend more time on what is really important.
 
 ```python
 
@@ -58,6 +64,27 @@ times_series_df.head()
 | 3   | 4             | Cash Flow   | 1           | 2022 | 900.00 |
 
 
+### But If I need to consume a lot of dataframes?
+
+- We got you 😊, just use "extract_many"
+
+```python
+
+raw_dataframe = pd.read_excel('historical_series_3Q22.xlsx', sheet_name=None)
+times_series_df = cronus_eater.extract_many(a_lot_of_raw_dataframes)
+times_series_df.head()
+
+```
+
+|     | Numeric Index | Label Index | Table Order | Time | Value  | Sheet Name     |
+| --- | ------------- | ----------- | ----------- | ---- | ------ | -------------- |
+| 0   | 4             | Cash Flow   | 1           | 3Q22 | 500.23 | random_sheet   |
+| 1   | 4             | Cash Flow   | 1           | 2Q22 | 302.81 | random_sheet   |
+| 2   | 7             |    ROE      | 1           | 1Q22 | 106.12 | random_sheet_2 |
+| 3   | 7             |    ROE      | 1           | 2022 | 900.00 | random_sheet_2 |
+
+
+
 ## Where to get it
 
 The source code is currently hosted on GitHub at: <https://github.com/breno-jesus-fernandes/cronus-eater>
@@ -66,11 +93,12 @@ Binary installers for the latest released version is going to available at the [
 
 
 ```sh
+# Through pip
 pip install cronus-eater
 ```
-### or throught poetry
 
 ```sh
+# Through poetry
 poetry add cronus-eater
 ```
 
