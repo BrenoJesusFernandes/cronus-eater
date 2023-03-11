@@ -1,11 +1,11 @@
-site_name: Notas musicais
-repo_url: https://github.com/dunossauro/notas-musicais
-repo_name: dunossauro/notas-musicais
+site_name: Cronus Eater
+repo_url: https://github.com/breno-jesus-fernandes/cronus-eater
+repo_name: breno-jesus-fernandes/cronus-eater
 edit_uri: tree/main/docs
 
 theme:
   name: material
-  language: pt-BR
+  language: en
   logo: assets/cronus-eater-logo.png
   favicon: assets/cronus-eater-logo.png
 
