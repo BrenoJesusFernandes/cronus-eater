@@ -1,21 +1,40 @@
-site_name: Cronus Eater
-repo_url: https://github.com/breno-jesus-fernandes/cronus-eater
-repo_name: breno-jesus-fernandes/cronus-eater
+site_name: Notas musicais
+repo_url: https://github.com/dunossauro/notas-musicais
+repo_name: dunossauro/notas-musicais
 edit_uri: tree/main/docs
 
 theme:
   name: material
-  language: en
+  language: pt-BR
   logo: assets/cronus-eater-logo.png
   favicon: assets/cronus-eater-logo.png
-  palette:
-  - media: '(prefers-color-scheme: dark)'
-    scheme: slate
-    primary: teal
-    accent: amber
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - pymdownx.tasklist
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
 
 extra_css:
   - stylesheets/extra.css
 
 watch:
-   - cronus_eater
+   - notas_musicais
+
+plugins:
+- macros
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [notas_musicais]
+
+extra:
+  commands:
+    run: notas-musicais
