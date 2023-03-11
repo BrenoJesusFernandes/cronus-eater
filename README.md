@@ -4,7 +4,7 @@
   <img width="450" height="278" src="https://raw.githubusercontent.com/breno-jesus-fernandes/cronus-eater/main/docs/img/cronus-eater-logo.png"><br>
 </div>
 
-[![Test](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/test.yaml/badge.svg)](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/test.yaml)
+[![Pipeline](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/pipeline.yaml)
 [![codecov](https://codecov.io/gh/breno-jesus-fernandes/cronus-eater/branch/main/graph/badge.svg?token=KDEDMQ6B2E)](https://codecov.io/gh/breno-jesus-fernandes/cronus-eater)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/cronus-eater.svg)](https://pypi.org/project/cronus-eater/)
 [![Package Status](https://img.shields.io/pypi/status/cronus-eater.svg)](https://pypi.org/project/cronus-eater/)
