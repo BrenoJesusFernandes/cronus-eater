@@ -11,7 +11,7 @@ theme:
   palette:
   - media: '(prefers-color-scheme: dark)'
     scheme: slate
-    primary: teal
+    primary: indigo
     accent: amber
 
 markdown_extensions:
