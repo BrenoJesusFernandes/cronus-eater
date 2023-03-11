@@ -1,0 +1,32 @@
+site_name: Cronus Eater
+repo_url: https://github.com/breno-jesus-fernandes/cronus-eater
+repo_name: breno-jesus-fernandes/cronus-eater
+edit_uri: tree/main/docs/docs/
+
+theme:
+  name: material
+  language: en
+  logo: img/cronus-eater-logo.png
+  favicon: img/cronus-eater-logo.png
+  palette:
+  - media: '(prefers-color-scheme: dark)'
+    scheme: slate
+    primary: teal
+    accent: amber
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - pymdownx.tasklist
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+extra_css:
+  - stylesheets/extra.css
+

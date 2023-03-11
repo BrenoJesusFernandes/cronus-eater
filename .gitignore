@@ -132,3 +132,6 @@ poetry.lock
 
 # vscode configs
 .vscode/
+
+# mkdocs site
+docs/site

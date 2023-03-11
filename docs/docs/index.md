@@ -1,5 +1,9 @@
 # Cronus Eater
 
+<div align="center">
+  <img width="450" height="278" src="https://raw.githubusercontent.com/breno-jesus-fernandes/cronus-eater/main/docs/docs/img/cronus-eater-logo.png"><br>
+</div>
+
 Extract and normalize time series from any spreadsheet with differents patterns.
 
 ## How to add a new feature or fix a bug?
