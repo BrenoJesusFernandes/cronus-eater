@@ -5,6 +5,7 @@
 </div>
 
 [![Pipeline](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/breno-jesus-fernandes/cronus-eater/actions/workflows/pipeline.yaml)
+[![Documentation Status](https://readthedocs.org/projects/cronus-eater/badge/?version=latest)](https://cronus-eater.readthedocs.io/en/latest/?badge=latest)
 [![codecov](https://codecov.io/gh/breno-jesus-fernandes/cronus-eater/branch/main/graph/badge.svg?token=KDEDMQ6B2E)](https://codecov.io/gh/breno-jesus-fernandes/cronus-eater)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/cronus-eater.svg)](https://pypi.org/project/cronus-eater/)
 [![Package Status](https://img.shields.io/pypi/status/cronus-eater.svg)](https://pypi.org/project/cronus-eater/)
