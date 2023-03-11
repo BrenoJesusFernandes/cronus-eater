@@ -1,4 +1,6 @@
-# Development Docs
+# Cronus Eater
+
+Extract and normalize time series from any spreadsheet with differents patterns.
 
 ## How to add a new feature or fix a bug?
 
