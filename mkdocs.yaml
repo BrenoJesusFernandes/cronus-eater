@@ -30,3 +30,16 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
+watch:
+   - cronus_eater
+
+plugins:
+- macros
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [cronus_eater]
+
+extra:
+  commands:
+    run: cronus-eater
