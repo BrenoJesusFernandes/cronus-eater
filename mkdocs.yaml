@@ -8,11 +8,6 @@ theme:
   language: en
   logo: img/cronus-eater-logo.png
   favicon: img/cronus-eater-logo.png
-  palette:
-  - media: '(prefers-color-scheme: dark)'
-    scheme: slate
-    primary: teal
-    accent: amber
 
 markdown_extensions:
   - attr_list
