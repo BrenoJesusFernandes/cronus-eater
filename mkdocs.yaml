@@ -26,15 +26,15 @@ extra_css:
   - stylesheets/extra.css
 
 watch:
-   - notas_musicais
+   - cronus_eater
 
 plugins:
 - macros
 - mkdocstrings:
     handlers:
       python:
-        paths: [notas_musicais]
+        paths: [cronus_eater]
 
 extra:
   commands:
-    run: notas-musicais
+    run: cronus-eater
