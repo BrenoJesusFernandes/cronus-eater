@@ -276,43 +276,22 @@ def extract_from_all_raw_dataframes(
     return all_raw_df
 
 
-@overload
-def extract(
-    target: Union[pd.DataFrame, Dict[Union[str, int], pd.DataFrame]],
-    mode: Literal['tidy'],
-) -> pd.DataFrame:
-    ...
-
-
-@overload
-def extract(
-    target: Union[pd.DataFrame, Dict[Union[str, int], pd.DataFrame]],
-    mode: Literal['tidy'] = 'tidy',
-) -> pd.DataFrame:
-    ...
-
-
-@overload
-def extract(
-    target: Dict[Union[str, int], pd.DataFrame],
-    mode: Literal['raw'] = 'raw',
-) -> List[pd.DataFrame]:
-    ...
-
-
-def extract(
-    target: Union[pd.DataFrame, Dict[Union[str, int], pd.DataFrame]],
+def extract_many(
+    raw_dataframes: Dict[Union[str, int], pd.DataFrame],
     mode: Union[Literal['tidy'], Literal['raw']] = 'tidy',
-) -> Union[
-    pd.DataFrame, List[pd.DataFrame], Dict[Union[str, int], List[pd.DataFrame]]
-]:
+) -> Union[pd.DataFrame, Dict[Union[str, int], List[pd.DataFrame]]]:
+    if mode == 'tidy':
+        return extract_from_all_dataframes(raw_dataframes)
+    elif mode == 'raw':
+        return extract_from_all_raw_dataframes(raw_dataframes)
 
-    if isinstance(target, pd.DataFrame) and mode == 'tidy':
-        return extract_from_dataframe(target)
-    elif isinstance(target, pd.DataFrame):
-        return extract_raw(target)
-    else:
-        if mode == 'tidy':
-            return extract_from_all_dataframes(target)
-        else:
-            return extract_from_all_raw_dataframes(target)
+
+def extract(
+    raw_dataframe: pd.DataFrame,
+    mode: Union[Literal['tidy'], Literal['raw']] = 'tidy',
+) -> Union[pd.DataFrame, List[pd.DataFrame]]:
+
+    if mode == 'tidy':
+        return extract_from_dataframe(raw_dataframe)
+    elif mode == 'raw':
+        return extract_raw(raw_dataframe)

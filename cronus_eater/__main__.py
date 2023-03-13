@@ -16,7 +16,7 @@ def main():
     )
 
     logger.info('Processing Time Series ...')
-    times_series_df = cronus_eater.extract(raw_dataframes)
+    times_series_df = cronus_eater.extract_many(raw_dataframes, mode='tidy')
 
     norm_index = (
         times_series_df['Label Index']
