@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cronus-eater"
-version = "0.1.0a9"
+version = "0.1.0a10"
 description = "A simple tool to get time series from spreadsheets"
 authors = ["Breno Fernandes <breno.de.jesus.fernandes@gmail.com>"]
 license = "MIT"
