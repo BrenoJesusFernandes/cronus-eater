@@ -12,6 +12,15 @@ def test_extract_raw():
     assert len(raw_time_series) == 6
 
 
+def test_extract_raw_pagseguro():
+    df = pd.read_excel(
+        'tests/integration/data/btg_3Q22.xlsx',
+        sheet_name='InputSite_Highlights',
+    )
+    raw_time_series = cronus_eater.extract(df, mode='raw')
+    assert len(raw_time_series) == 6
+
+
 def test():
     target_df = pd.DataFrame(
         {
