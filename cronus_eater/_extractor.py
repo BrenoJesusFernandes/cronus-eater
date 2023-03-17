@@ -8,16 +8,6 @@ from cronus_eater import _normalizer, _validator
 from cronus_eater.model import TimeSeries, TimeSeriesMetadata
 
 
-def find_metadata(df: pd.DataFrame, origin: str) -> List[TimeSeriesMetadata]:
-    return []
-
-
-def slice_dataframe(
-    df: pd.DataFrame, metadata: List[TimeSeriesMetadata]
-) -> List[TimeSeries]:
-    return []
-
-
 def find_header(df: pd.DataFrame, start_row: int, end_column: int) -> int:
     for index, value in df.iloc[start_row - 1 :: -1, end_column].items():
         if _validator.is_date_time(value):
