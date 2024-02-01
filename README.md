@@ -9,7 +9,7 @@
 [![codecov](https://codecov.io/gh/breno-jesus-fernandes/cronus-eater/branch/main/graph/badge.svg?token=KDEDMQ6B2E)](https://codecov.io/gh/breno-jesus-fernandes/cronus-eater)
 [![PyPI Latest Release](https://img.shields.io/pypi/v/cronus-eater.svg)](https://pypi.org/project/cronus-eater/)
 [![Package Status](https://img.shields.io/pypi/status/cronus-eater.svg)](https://pypi.org/project/cronus-eater/)
-[![Python: 3.7 | 3.8 | 3.9 | 3.10 | 3.11](https://img.shields.io/badge/Python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue.svg)](https://pypi.org/project/cronus-eater/)
+[![Python: 3.8 | 3.9 | 3.10 | 3.11 | 3.12](https://img.shields.io/badge/Python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue.svg)](https://pypi.org/project/cronus-eater/)
 [![Downloads](https://static.pepy.tech/badge/cronus-eater)](https://pepy.tech/project/cronus-eater)
 [![Code style: blue](https://img.shields.io/badge/code%20style-blue-blue.svg)](https://github.com/grantjenks/blue)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
